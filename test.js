@@ -61,13 +61,13 @@ describe("PATCH /items/:name", () => {
     })
 
     test("Responds with 404 for invalid name", async () => {
-        const res = await (await request(app).patch(`/items/pepsi`)).send({ name: "coke" });
+        const res = await request(app).patch(`/items/pepsi`).send({ name: "coke" });
         expect(res.statusCode).toBe(404);
     })
 })
 
 describe("DELETE /items/:name", () => {
-    test("Updates a single item", async () => {
+    test("deletes a single item", async () => {
         // const gummies = { name: "gummies", price: 0.50 }
         const res = await request(app).delete(`/items/${snickers.name}`)
         expect(res.statusCode).toBe(200);
