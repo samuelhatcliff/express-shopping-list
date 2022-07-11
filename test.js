@@ -21,7 +21,7 @@ describe("GET /items", () => {
     test("Get all items", async () => {
         const res = await request(app).get("/items");
         expect(res.statusCode).toBe(200);
-        expect(res.body).toEqual({ items: [snickers] })
+        expect(res.body).toEqual([{ "name": "snickers", "price": 1.99 }])
     })
 })
 
