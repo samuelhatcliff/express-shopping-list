@@ -1,5 +1,4 @@
 const express = require('express');
-const ExpressError = require('./expressError');
 const router = new express.Router();
 const items = require("./fakeDb.js")
 
@@ -16,7 +15,8 @@ router.post("/", (req, res, next) => {
         if (!req.body.name) throw new ExpressError("Name is required", 404)
         const item = req.body
         items.push(item)
-        return res.status(201).json({ "added": { "item": gummies } })
+        console.log("item1",)
+        return res.status(201).json({ "added": { "item": item } })
     } catch (err) {
         return next(err)
     }
@@ -45,7 +45,7 @@ router.patch("/:name", (req, res, next) => {
     }
 })
 
-router.delete(":/name", (req, res, next) => {
+router.delete("/:name", (req, res, next) => {
     console.log("delete route")
     try {
         const idx = items.findIndex(element => element["name"] === req.params.name);
