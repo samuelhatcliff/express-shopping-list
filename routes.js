@@ -16,7 +16,7 @@ router.post("/", (req, res, next) => {
         if (!req.body.name) throw new ExpressError("Name is required", 404)
         const item = req.body
         items.push(item)
-        return res.status(201).json({ "added": { item } })
+        return res.status(201).json({ "added": { "item": gummies } })
     } catch (err) {
         return next(err)
     }
@@ -24,7 +24,7 @@ router.post("/", (req, res, next) => {
     //Question: why is the variable name showing up in response?
 })
 
-router.get("/:name", (req, res) => {
+router.get("/:name", (req, res, next) => {
     try {
         const found = items.find(element => element["name"] === req.params.name);
         if (!found) throw new ExpressError("Uh-Oh! Item not found!", 404)

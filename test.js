@@ -42,8 +42,9 @@ describe("POST /items", () => {
     test("Creating an item", async () => {
         const gummies = { name: "gummies", price: 0.50 }
         const res = await request(app).post("/items").send(gummies)
+        expect(res.body).toEqual({ "added": { "item": gummies } })
+
         expect(res.statusCode).toBe(201);
-        expect(res.body).toEqual({ "added": gummies })
     })
 
     test("Responds with 404 if name is missing", async () => {
