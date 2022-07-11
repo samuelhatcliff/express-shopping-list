@@ -13,12 +13,12 @@ router.post("/", (req, res, next) => {
     // console.log("#####", req.body, typeof (req.body))
     // const item = JSON.parse(req.body)
     try {
-        if (!req.body.name) throw new ExpressError("Name is required", 400)
+        if (!req.body.name) throw new ExpressError("Name is required", 404)
         const item = req.body
         items.push(item)
         return res.status(201).json({ "added": { item } })
-    } catch (e) {
-        next(e)
+    } catch (err) {
+        return next(err)
     }
 
     //Question: why is the variable name showing up in response?
@@ -29,8 +29,8 @@ router.get("/:name", (req, res) => {
         const found = items.find(element => element["name"] === req.params.name);
         if (!found) throw new ExpressError("Uh-Oh! Item not found!", 404)
         return res.json(found)
-    } catch (e) {
-        next(e)
+    } catch (err) {
+        return next(err)
     }
 })
 
@@ -40,8 +40,8 @@ router.patch("/:name", (req, res, next) => {
         if (!foundItem) throw new ExpressError("Uh-Oh! Item not found!", 404)
         foundItem.name = req.body.name;
         return res.json({ "updated": foundItem });
-    } catch (e) {
-        return next(e)
+    } catch (err) {
+        return next(err)
     }
 })
 
@@ -53,8 +53,8 @@ router.delete(":/name", (req, res, next) => {
         items.splice(idx, 1)
         console.log("$$$$$$$$$")
         return res.json({ message: "Deleted" })
-    } catch (e) {
-        return next(e)
+    } catch (err) {
+        return next(err)
     }
 })
 

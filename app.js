@@ -6,7 +6,6 @@ app.use('/items', routes)
 
 /** 404 handler */
 app.use(function (req, res, next) {
-    console.log("404 handler")
     return new ExpressError("Not Found", 404);
 });
 
@@ -18,5 +17,6 @@ app.use(function (err, req, res, next) {
         error: { message, status }
     });
 })
+
 
 module.exports = app;
